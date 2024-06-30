@@ -52,6 +52,7 @@ def transform_csv(input_file, output_file):
             with open(output_file, 'w', newline='', encoding='utf-8') as outfile:
                 writer = csv.writer(outfile)
 
+                # Write the new header to the output file
                 writer.writerow([column_mapping[header[i]] for i in indices])
 
                 # Write the filtered and transformed rows to the output file
@@ -62,8 +63,15 @@ def transform_csv(input_file, output_file):
                     date = datetime.strptime(filtered_row[0], "%d.%m.%y").strftime("%d/%m/%Y")
                     filtered_row[0] = date
 
-                    # Replace comma with dot in the Amount column (last column in the filtered row)
-                    filtered_row[-1] = filtered_row[-1].replace(',', '.')
+                    # Properly format the Amount column
+                    amount = filtered_row[-1]
+                    if '.' in amount and ',' not in amount:
+                        # Treat as a thousand separator, remove dot
+                        amount = amount.replace('.', '')
+                    elif ',' in amount:
+                        # Replace comma with dot for decimal point
+                        amount = amount.replace('.', '').replace(',', '.')
+                    filtered_row[-1] = amount
 
                     writer.writerow(filtered_row)
 
