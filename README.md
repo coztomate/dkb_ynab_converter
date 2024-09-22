@@ -16,12 +16,12 @@ Python 3.9
 
 To run the script, use the following command:
 
-`python transform_csv.py`
+`python dkb_ynab_converter.py`
 
 Using Command-Line Arguments
 
 You can also specify the input file and output folder directly from the command line:
 
-`python transform_csv.py --input path/to/input.csv --output path/to/output/folder`
+`python dkb_ynab_converter.py --input path/to/input.csv --output path/to/output/folder`
 
 If no arguments are provided, the script will open dialogs for you to choose the input file and output folder.
