@@ -31,7 +31,8 @@ def choose_output_folder():
 def transform_csv(input_file, output_file):
     try:
         with open(input_file, 'r', encoding='utf-8') as infile:
-            reader = csv.reader(infile, delimiter=';')
+            # Change delimiter to a comma to match the input file format
+            reader = csv.reader(infile, delimiter=',')
 
             for row in reader:
                 if "Buchungsdatum" in row:
@@ -78,6 +79,7 @@ def transform_csv(input_file, output_file):
         print(f"File transformed successfully and saved to {output_file}")
     except Exception as e:
         print(f"An error occurred: {e}")
+
 
 def main():
     parser = argparse.ArgumentParser(description="Transform CSV file")
